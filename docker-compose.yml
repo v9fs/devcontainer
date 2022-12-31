@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  v9fs-dev:
+    build: .
+    volumes:
+      - ~/.gnupg:/root/.gnupg
+      - ~/images:/boot
+      - v9fs-linux:/v9fs/linux
+      - v9fs-ccache:/ccache
+      - v9fs-build:/build
+    networks:
+      - default
+    ports:
+      - 3000
+volumes:
+  v9fs-linux:  
+    external: true
+  v9fs-ccache:  
+    external: true
+  v9fs-build:  
+    external: true
