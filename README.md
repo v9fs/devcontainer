@@ -28,9 +28,9 @@ Copy vscode directory to the root of your workspace as .vscode and modify to sui
 Once everything is connected make sure you install the VM description:
 (this should probably be a task)
 
-'''
+```
 % virsh -c qemu+tcp://gateway.docker.internal/session define .vscode/DebugKernel-arm64.xml
-'''
+```
 
 ## volume mount points
 
