@@ -141,5 +141,6 @@
   </devices>
   <qemu:commandline>
     <qemu:arg value='-s'/>
+    
   </qemu:commandline>
 </domain>

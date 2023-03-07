@@ -8,7 +8,7 @@
       "name": "(gdb) linux",
       "type": "cppdbg",
       "request": "launch",
-      "preLaunchTask": "vm",
+      "preLaunchTask": "run",
       "program": "/build/vmlinux",
       "miDebuggerServerAddress": "gateway.docker.internal:1234",
       "args": [],
@@ -19,6 +19,7 @@
       "MIMode": "gdb",
       "miDebuggerArgs": "-n",
       "targetArchitecture": "arm64",
+      "logging": "trace=true",
       "setupCommands": [
         {
           "text": "set arch aarch64",
@@ -36,7 +37,7 @@
           "text": "-enable-pretty-printing",
           "ignoreFailures": true
         }
-      ]
+      ],
     }
   ]
 }

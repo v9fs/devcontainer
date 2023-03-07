@@ -11,7 +11,7 @@
   <os>
     <type arch='aarch64' machine='virt'>hvm</type>
     <kernel>/Users/erivan01/images/Image</kernel>
-    <cmdline>root=/dev/vda earlycon panic=-1 nokaslr single</cmdline>
+    <cmdline>root=/dev/vda1 earlycon panic=-1 /bbin/cpud</cmdline>
   </os>
   <on_poweroff>destroy</on_poweroff>
   <on_reboot>destroy</on_reboot>
@@ -20,7 +20,7 @@
     <emulator>/opt/homebrew/bin/qemu-system-aarch64</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='raw'/>
-      <source file='/Users/erivan01/images/core-image-minimal-dev-qemuarm64.ext4'/>
+      <source file='/Users/erivan01/images/ubuntu-22.10-live-server-arm64.iso'/>
       <target dev='vda' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
     </disk>
@@ -41,14 +41,6 @@
   <controller type='virtio-serial' index='0'>
     <address type='pci' domain='0x0000' bus='0x02' slot='0x00' function='0x0'/>
   </controller>
-  <interface type='user'>
-    <mac address="00:11:22:33:44:55"/>
-    <ip family='ipv4' address='172.17.2.0' prefix='24'/>
-    <ip family='ipv6' address='2001:db8:ac10:fd01::' prefix='64'/>
-    <model type='virtio'/>
-    <link state='up'/>
-    <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
-  </interface>
   <console type='pty'>
     <target type='serial' port='1'/>
   </console>
@@ -57,6 +49,8 @@
   </console>
   <qemu:commandline>
     <qemu:arg value='-s'/>
+    <qemu:arg value='-netdev'/>
+    <qemu:arg value='user,id=n1,hostfwd=tcp:127.0.0.1:17010-:17010,net=192.168.1.0/24,host=192.168.1.1'/>
   </qemu:commandline>
 </domain>
 
