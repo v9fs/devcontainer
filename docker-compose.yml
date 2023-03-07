@@ -1,9 +1,10 @@
 version: "3.9"
 services:
-  v9fs-dev:
+  v9fs-dev-v0.3:
     build: .
     volumes:
-      - ~/.gnupg:/root/.gnupg
+      - ~/.gnupg:/home/vscode/.gnupg
+      - ~:/home/user
       - ~/images:/boot
       - v9fs-linux:/v9fs/linux
       - v9fs-ccache:/ccache
