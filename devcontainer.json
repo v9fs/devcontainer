@@ -3,6 +3,11 @@
 {
 	"name": "v9fs-dev",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "v9fs-dev",
-	"workspaceFolder": "/v9fs/linux",
+	"service": "devcontainer",
+	"workspaceFolder": "/home/vscode",
+	"customizations": {
+		"vscode": {
+				"extensions": ["jvalecillos.gpg","ms-vscode.cpptools","dendron.dendron","GitHub.vscode-pull-request-github","eamodio.gitlens"]
+		}
+	}
 }

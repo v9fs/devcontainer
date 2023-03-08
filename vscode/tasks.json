@@ -78,6 +78,9 @@
       "presentation": {
         "echo": false,
         "group": "build"
+      },
+      "options": {
+        "cwd": "/workspaces/linux"
       }
     }
   ]

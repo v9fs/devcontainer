@@ -1,8 +1,6 @@
-
 FROM mcr.microsoft.com/devcontainers/base:jammy
 
 ARG TARGETARCH
-
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
@@ -34,11 +32,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/g++ && \
     ln -s /usr/bin/ccache /usr/libexec/ccache-wrappers/gcc
 RUN pip install b4
-RUN mkdir -p /v9fs/test
+RUN mkdir -p /home/vscode/test
 # setup tests
-WORKDIR /v9fs/test
+WORKDIR /home/vscode/test
 RUN git clone https://github.com/chaos/diod.git
-WORKDIR /v9fs/test/diod
+WORKDIR /home/vscode/test/diod
 RUN ./autogen.sh
 RUN ./configure
 RUN make
@@ -52,31 +50,33 @@ RUN if [ `uname -m` = "aarch64" ]; then \
     wget https://go.dev/dl/go1.19.linux-$TARGETGOARCH.tar.gz; \
     tar xf go*.tar.gz;rm go*.tar.gz;mv go /usr/local
 ENV GOROOT /usr/local/go
-ENV GOPATH /v9fs/test/go
-ENV PATH /v9fs/test/go/bin:/usr/local/go/bin:${PATH}
+ENV GOPATH /home/vscode/test/go
+ENV PATH /home/vscode/test/go/bin:/usr/local/go/bin:${PATH}
 ENV LANG "en_US.UTF-8"
 ENV MAKE "/usr/bin/make"
-WORKDIR /v9fs/test
-RUN mkdir -p /v9fs/test/.ssh
-RUN ssh-keygen -t rsa -q -f "/v9fs/test/.ssh/identity" -N ""
+WORKDIR /home/vscode/test
+RUN mkdir -p /home/vscode/test/.ssh
+RUN ssh-keygen -t rsa -q -f "/home/vscode/test/.ssh/identity" -N ""
 RUN git clone -b v0.9.0 https://github.com/u-root/u-root.git
 RUN git clone https://github.com/u-root/cpu.git
-WORKDIR /v9fs/test/u-root
+WORKDIR /home/vscode/test/u-root
 RUN go mod tidy
 RUN go build .
 RUN go install .
-WORKDIR /v9fs/test/cpu
+WORKDIR /home/vscode/test/cpu
 RUN go mod tidy
-WORKDIR /v9fs/test/cpu/cmds/cpud
-RUN go mod tidy
-RUN go build
-RUN go install
-WORKDIR /v9fs/test/cpu/cmds/cpu
+WORKDIR /home/vscode/test/cpu/cmds/cpud
 RUN go mod tidy
 RUN go build
 RUN go install
-WORKDIR /v9fs/test/cpu
-RUN /v9fs/test/go/bin/u-root -files /v9fs/test/.ssh/identity.pub:key.pub -files /mnt -uroot-source /v9fs/test/u-root -initcmd=/bbin/cpud $* core cmds/cpud
+WORKDIR /home/vscode/test/cpu/cmds/cpu
+RUN go mod tidy
+RUN go build
+RUN go install
+WORKDIR /home/vscode/test/cpu
+RUN /home/vscode/test/go/bin/u-root -files /home/vscode/test/.ssh/identity.pub:key.pub -files /mnt -uroot-source /home/vscode/test/u-root -initcmd=/bbin/cpud $* core cmds/cpud
+WORKDIR /home/vscode
+ADD vscode /home/vscode/.vscode
 ENV CCACHE_DIR=/ccache
 ENV CCACHE_WRAPPERSDIR "/usr/libexec/ccache-wrappers"
 ENV LANG "en_US.UTF-8"

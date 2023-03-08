@@ -1,12 +1,14 @@
 version: "3.9"
 services:
-  v9fs-dev-v0.3:
-    build: .
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - ~/.gnupg:/home/vscode/.gnupg
       - ~:/home/user
+      - ~/Documents/Journals:/workspaces/Journals
       - ~/images:/boot
-      - v9fs-linux:/v9fs/linux
+      - v9fs-linux:/workspaces/linux
       - v9fs-ccache:/ccache
       - v9fs-build:/build
     networks:
@@ -14,9 +16,9 @@ services:
     ports:
       - 3000
 volumes:
-  v9fs-linux:  
+  v9fs-linux:
     external: true
-  v9fs-ccache:  
+  v9fs-ccache:
     external: true
-  v9fs-build:  
+  v9fs-build:
     external: true
