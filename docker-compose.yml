@@ -1,14 +1,12 @@
 version: "3.9"
 services:
   devcontainer:
+    user: vscode
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ~:/home/user
-      - ~/Documents/Journals:/workspaces/Journals
-      - ~/images:/boot
-      - v9fs-linux:/workspaces/linux
+      - v9fs-linux:/home/vscode/linux
       - v9fs-ccache:/ccache
       - v9fs-build:/build
     networks:

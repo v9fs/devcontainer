@@ -5,9 +5,16 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "devcontainer",
 	"workspaceFolder": "/home/vscode",
+	"remoteUser": "vscode",
+	"containerUser": "vscode",
 	"customizations": {
 		"vscode": {
 				"extensions": ["jvalecillos.gpg","ms-vscode.cpptools","dendron.dendron","GitHub.vscode-pull-request-github","eamodio.gitlens"]
 		}
-	}
+	},
+	"mounts": [
+		"source=${localEnv:HOME},target=/home/user,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/images,target=/boot,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/Documents/Journals,target=/home/vscode/Journals,type=bind,consistency=cached",
+	]
 }
