@@ -80,7 +80,7 @@
         "group": "build"
       },
       "options": {
-        "cwd": "/workspaces/linux"
+        "cwd": "/home/vscode/linux"
       }
     }
   ]

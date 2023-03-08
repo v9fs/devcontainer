@@ -3,7 +3,7 @@
 {
 	"name": "v9fs-dev",
 	"dockerComposeFile": "docker-compose.yml",
-	"service": "devcontainer",
+	"service": "v9fs-dev",
 	"workspaceFolder": "/home/vscode",
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
@@ -13,8 +13,10 @@
 		}
 	},
 	"mounts": [
-		"source=${localEnv:HOME},target=/home/user,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/images,target=/boot,type=bind,consistency=cached",
-		"source=${localEnv:HOME}/Documents/Journals,target=/home/vscode/Journals,type=bind,consistency=cached",
+		"source=${localEnv:HOME},target=/home/user,type=bind,consistency=default",
+		"source=${localEnv:HOME}/images,target=/boot,type=bind,consistency=default",
+		"source=${localEnv:HOME}/Documents/Journals,target=/home/vscode/Journals,type=bind,consistency=default",
+		"source=${localEnv:HOME}/.mutt,target=/home/vscode/.mutt,type=bind,consistency=default",
+		"source=${localEnv:HOME}/.muttrc,target=/home/vscode/.muttrc,type=bind,consistency=default",
 	]
 }
