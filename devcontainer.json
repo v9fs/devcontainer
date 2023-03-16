@@ -1,9 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "linux-dev",
 	"image": "ghcr.io/v9fs/docker:latest"
-	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
 	"customizations": {
@@ -13,5 +11,6 @@
 	},
 	"mounts": [
 		"source=${localEnv:HOME},target=/home/vscode,type=bind,consistency=default",
-	]
+	],
+	"forwardPorts": [3000]
 }
