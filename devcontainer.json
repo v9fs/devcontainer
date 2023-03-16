@@ -1,10 +1,9 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "v9fs-dev",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "v9fs-dev",
-	"workspaceFolder": "/home/vscode",
+	"name": "linux-dev",
+	"image": "ghcr.io/v9fs/docker:latest"
+	"workspaceFolder": "/workspace",
 	"remoteUser": "vscode",
 	"containerUser": "vscode",
 	"customizations": {
@@ -13,10 +12,6 @@
 		}
 	},
 	"mounts": [
-		"source=${localEnv:HOME},target=/home/user,type=bind,consistency=default",
-		"source=${localEnv:HOME}/images,target=/boot,type=bind,consistency=default",
-		"source=${localEnv:HOME}/Documents/Journals,target=/home/vscode/Journals,type=bind,consistency=default",
-		"source=${localEnv:HOME}/.mutt,target=/home/vscode/.mutt,type=bind,consistency=default",
-		"source=${localEnv:HOME}/.muttrc,target=/home/vscode/.muttrc,type=bind,consistency=default",
+		"source=${localEnv:HOME},target=/home/vscode,type=bind,consistency=default",
 	]
 }
